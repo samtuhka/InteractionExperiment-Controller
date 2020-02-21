@@ -1,0 +1,15 @@
+import pyaudio
+
+def test_inputs():
+    p = pyaudio.PyAudio()
+    info = p.get_host_api_info_by_index(0)
+    numdevices = info.get('deviceCount')
+    for i in range(0, numdevices):
+                name = p.get_device_info_by_host_api_device_index(0, i).get('name')
+                print(name, i)
+                if "USB Audio" in name:
+                    return i
+    return -1
+
+if __name__ == '__main__':
+    test_inputs()
